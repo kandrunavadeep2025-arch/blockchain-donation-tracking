@@ -1,0 +1,30 @@
+﻿# Environment variables and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build output
+dist/
+**/dist/
+dist-ssr/
+
+# Hardhat generated files
+blockchain/artifacts/
+blockchain/cache/
+blockchain/typechain-types/
+blockchain/coverage/
+
+# Logs and local files
+*.log
+*.local
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

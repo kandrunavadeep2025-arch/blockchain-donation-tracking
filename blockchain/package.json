@@ -1,0 +1,23 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "test": "node --test ./test/DonationTracker.test.js"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.0.15",
+    "@types/node": "^22.20.2",
+    "ethers": "^6.17.0",
+    "hardhat": "^3.16.0",
+    "typescript": "~6.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.8"
+  }
+}
