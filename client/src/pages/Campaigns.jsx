@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./campaigns.css";
+import "./Campaigns.css";
 
 const API = "https://blockchain-donation-tracking.onrender.com/api";
 
@@ -32,15 +32,12 @@ function Campaigns() {
 
     try {
       const response = await fetch(`${API}/campaigns`);
-
       const data = await response.json();
 
       if (!response.ok || !data.success) {
         throw new Error(data.message || "Unable to fetch campaigns.");
       }
 
-      // The backend already verifies on-chain campaign status.
-      // Never add hardcoded or sample campaigns here.
       const visibleCampaigns = (data.campaigns || []).filter(
         (campaign) =>
           ["active", "completed"].includes(campaign.status) &&
@@ -50,9 +47,8 @@ function Campaigns() {
       setCampaigns(visibleCampaigns);
     } catch (err) {
       console.error("Campaign loading error:", err);
-
       setError(
-        "Could not load campaigns. Check that the backend and Hardhat node are running."
+        "Could not load campaigns. Please check the backend connection and try again."
       );
     } finally {
       setLoading(false);
@@ -76,37 +72,43 @@ function Campaigns() {
     return (
       <div className="campaigns-page">
         <h1>Donation Campaigns</h1>
-        <p role="alert">{error}</p>
-        <button onClick={loadCampaigns}>Try Again</button>
+        <p className="campaigns-error" role="alert">{error}</p>
+        <button type="button" onClick={loadCampaigns}>
+          Try Again
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="campaigns-page">
-      <h1>Donation Campaigns</h1>
+    <main className="campaigns-page">
+      <div className="campaigns-header">
+        <p className="campaigns-eyebrow">TRANSPARENCY STARTS HERE</p>
+        <h1>Donation Campaigns</h1>
+        <p className="campaigns-subtitle">
+          Support verified campaigns and follow how funds are raised and used.
+          All amounts are displayed in test ETH.
+        </p>
 
-      <p className="campaigns-subtitle">
-        Support verified campaigns. All amounts are shown in test ETH.
-      </p>
-
-      <button
-        type="button"
-        onClick={loadCampaigns}
-        disabled={loading}
-      >
-        Refresh Campaigns
-      </button>
+        <button
+          type="button"
+          className="refresh-button"
+          onClick={loadCampaigns}
+        >
+          Refresh Campaigns
+        </button>
+      </div>
 
       <div className="campaign-container">
         {campaigns.length === 0 ? (
-          <div className="campaign-card">
+          <section className="campaign-empty">
+            <div className="empty-icon">♡</div>
             <h2>No approved campaigns yet</h2>
             <p>
-              New NGO campaigns appear here after an administrator approves
-              them. Sample campaigns are not displayed.
+              Campaigns will appear here after an administrator approves them.
+              Sample campaigns are not displayed.
             </p>
-          </div>
+          </section>
         ) : (
           campaigns.map((campaign) => {
             const goal = Number(campaign.goalAmount ?? 0);
@@ -132,106 +134,101 @@ function Campaigns() {
               >
                 {campaign.imageUrl && (
                   <img
+                    className="campaign-image"
                     src={campaign.imageUrl}
-                    alt={campaign.name}
-                    style={{
-                      width: "100%",
-                      maxHeight: "220px",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                    }}
+                    alt={campaign.name || "Campaign"}
                     onError={(event) => {
                       event.currentTarget.style.display = "none";
                     }}
                   />
                 )}
 
-                <h2>{campaign.name}</h2>
-
-                <p className="description">
-                  {campaign.description}
-                </p>
-
-                <p>
-                  <strong>Campaign ID:</strong>{" "}
-                  {campaign.blockchainCampaignId}
-                </p>
-
-                <p>
-                  <strong>Status:</strong>{" "}
-                  {completed ? "Completed" : "Active"}
-                </p>
-
-                <p>
-                  <strong>Fundraising Goal:</strong>{" "}
-                  {formatEth(goal)} ETH
-                </p>
-
-                <p>
-                  <strong>Total Raised:</strong>{" "}
-                  {formatEth(raised)} ETH
-                </p>
-
-                <div
-                  role="progressbar"
-                  aria-label={`Fundraising progress for ${campaign.name}`}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-valuenow={Math.round(progress)}
-                  style={{
-                    height: "10px",
-                    background: "#e5e7eb",
-                    borderRadius: "999px",
-                    overflow: "hidden",
-                    margin: "12px 0",
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "100%",
-                      width: `${progress}%`,
-                      background: completed ? "#16a34a" : "#2563eb",
-                      transition: "width 0.3s ease",
-                    }}
-                  />
-                </div>
-
-                <p>
-                  <strong>Progress:</strong> {progress.toFixed(2)}%
-                </p>
-
-                <p>
-                  <strong>Remaining to Goal:</strong>{" "}
-                  {formatEth(remaining)} ETH
-                </p>
-
-                <p>
-                  <strong>Expenses Paid to Recipients:</strong>{" "}
-                  {formatEth(paid)} ETH
-                </p>
-
-                {completed ? (
-                  <button type="button" disabled>
-                    Fundraising Goal Reached
-                  </button>
-                ) : (
-                  <button
-                    className="donate-button"
-                    onClick={() =>
-                      navigate(
-                        `/donate/${campaign.blockchainCampaignId}`
-                      )
-                    }
+                <div className="campaign-card-content">
+                  <span
+                    className={`campaign-status ${
+                      completed ? "status-completed" : "status-active"
+                    }`}
                   >
-                    Donate ETH
-                  </button>
-                )}
+                    <span className="status-dot" />
+                    {completed ? "Completed" : "Active"}
+                  </span>
+
+                  <h2>{campaign.name}</h2>
+
+                  <p className="description">
+                    {campaign.description || "No description provided."}
+                  </p>
+
+                  <p className="campaign-id">
+                    Campaign ID: {campaign.blockchainCampaignId}
+                  </p>
+
+                  <div className="funding-summary">
+                    <div>
+                      <span className="metric-label">Total raised</span>
+                      <strong className="raised-amount">
+                        {formatEth(raised)} ETH
+                      </strong>
+                    </div>
+
+                    <div className="goal-amount">
+                      <span className="metric-label">Goal</span>
+                      <strong>{formatEth(goal)} ETH</strong>
+                    </div>
+                  </div>
+
+                  <div
+                    className="campaign-progress"
+                    role="progressbar"
+                    aria-label={`Fundraising progress for ${campaign.name}`}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={Math.round(progress)}
+                  >
+                    <div
+                      className={`campaign-progress-fill ${
+                        completed ? "progress-completed" : ""
+                      }`}
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+
+                  <p className="progress-label">
+                    <span>{progress.toFixed(1)}% funded</span>
+                    <span>{formatEth(remaining)} ETH remaining</span>
+                  </p>
+
+                  <div className="expense-summary">
+                    <span>Expenses paid to recipients</span>
+                    <strong>{formatEth(paid)} ETH</strong>
+                  </div>
+
+                  {completed ? (
+                    <button
+                      type="button"
+                      className="donate-button"
+                      disabled
+                    >
+                      Fundraising Goal Reached
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="donate-button"
+                      onClick={() =>
+                        navigate(`/donate/${campaign.blockchainCampaignId}`)
+                      }
+                    >
+                      Donate ETH <span aria-hidden="true">→</span>
+                    </button>
+                  )}
+                </div>
               </article>
             );
           })
         )}
       </div>
-    </div>
+    </main>
   );
 }
 
