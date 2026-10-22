@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const API = "http://localhost:5000/api";
+const API = "https://blockchain-donation-tracking.onrender.com/api";
 
 const cardStyle = {
   border: "1px solid #e5e7eb",
