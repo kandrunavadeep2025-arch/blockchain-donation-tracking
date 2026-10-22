@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Campaigns.css";
+import "./campaigns.css";
 
 const API = "https://blockchain-donation-tracking.onrender.com/api";
 
