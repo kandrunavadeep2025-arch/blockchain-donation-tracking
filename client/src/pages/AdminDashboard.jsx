@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { contract } from "../contract";
 import { ethers } from "ethers";
-const API = "http://localhost:5000/api";
+const API = "https://blockchain-donation-tracking.onrender.com/api";
 
 function AdminDashboard() {
   const [campaigns, setCampaigns] = useState([]);

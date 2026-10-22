@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import { contract } from "../contract";
 
-const API = "http://localhost:5000/api";
+const API = "https://blockchain-donation-tracking.onrender.com/api";
 const SEPOLIA_CHAIN_ID = 11155111n;
 
 export default function AddExpense() {

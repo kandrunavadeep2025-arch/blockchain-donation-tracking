@@ -31,7 +31,7 @@ function ProtectedRoute({ children, allowedRoles }) {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/api/auth/me",
+          "https://blockchain-donation-tracking.onrender.com/api/auth/me",
           {
             headers: {
               Authorization: `Bearer ${token}`,

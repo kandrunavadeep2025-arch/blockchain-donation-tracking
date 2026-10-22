@@ -69,7 +69,7 @@ function CreateCampaign() {
       setStatus("Checking your NGO account...");
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/me",
+        "https://blockchain-donation-tracking.onrender.com/api/auth/me",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -186,7 +186,7 @@ function CreateCampaign() {
 
       try {
         saveResponse = await fetch(
-          "http://localhost:5000/api/campaigns",
+          "https://blockchain-donation-tracking.onrender.com/api/campaigns",
           {
             method: "POST",
             headers: {
