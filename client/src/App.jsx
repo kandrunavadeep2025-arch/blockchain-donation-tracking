@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Campaigns from "./pages/campaigns";
+import Campaigns from "./pages/Campaigns";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
