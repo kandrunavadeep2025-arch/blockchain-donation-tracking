@@ -13,14 +13,21 @@ const campaignAbi = [
 
 function getContract() {
   const address = process.env.CONTRACT_ADDRESS;
+  const rpcUrl = process.env.BLOCKCHAIN_RPC_URL;
 
   if (!address || !ethers.isAddress(address)) {
-    throw new Error("CONTRACT_ADDRESS is missing or invalid in server/.env");
+    throw new Error(
+      "CONTRACT_ADDRESS is missing or invalid in environment variables."
+    );
   }
 
-  const provider = new ethers.JsonRpcProvider(
-    process.env.BLOCKCHAIN_RPC_URL || "http://127.0.0.1:8545"
-  );
+  if (!rpcUrl) {
+    throw new Error(
+      "BLOCKCHAIN_RPC_URL is missing in environment variables."
+    );
+  }
+
+  const provider = new ethers.JsonRpcProvider(rpcUrl);
 
   return new ethers.Contract(address, campaignAbi, provider);
 }
@@ -30,7 +37,7 @@ function getStatus(status) {
 }
 
 // NGO creates the campaign on-chain first.
-// This endpoint verifies that transaction's resulting campaign before saving metadata.
+// This endpoint verifies the blockchain record before saving metadata.
 router.post(
   "/",
   requireAuth,
@@ -79,8 +86,10 @@ router.post(
         });
       }
 
-      if (!req.user.walletAddress ||
-          !ethers.isAddress(req.user.walletAddress)) {
+      if (
+        !req.user.walletAddress ||
+        !ethers.isAddress(req.user.walletAddress)
+      ) {
         return res.status(403).json({
           success: false,
           message: "Link an approved NGO wallet before creating campaigns.",
@@ -110,10 +119,12 @@ router.post(
         });
       }
 
-      if (onChain.name !== name.trim() ||
-          onChain.description !== description.trim() ||
-          onChain.imageUrl !== imageUrl ||
-          onChain.goalAmount !== ethers.parseEther(String(goalAmount))) {
+      if (
+        onChain.name !== name.trim() ||
+        onChain.description !== description.trim() ||
+        onChain.imageUrl !== imageUrl ||
+        onChain.goalAmount !== ethers.parseEther(String(goalAmount))
+      ) {
         return res.status(400).json({
           success: false,
           message: "Campaign details do not match the blockchain record.",
@@ -147,7 +158,7 @@ router.post(
         message: "Blockchain campaign registered as pending approval.",
       });
     } catch (error) {
-      console.error("Campaign creation error:", error.message);
+      console.error("Campaign creation error:", error);
 
       return res.status(500).json({
         success: false,
@@ -195,14 +206,15 @@ router.get(
         } catch (error) {
           console.warn(
             "Skipping campaign not present on chain:",
-            record.blockchainCampaignId
+            record.blockchainCampaignId,
+            error.message
           );
         }
       }
 
       return res.json({ success: true, campaigns });
     } catch (error) {
-      console.error("Admin campaign list error:", error.message);
+      console.error("Admin campaign list error:", error);
 
       return res.status(500).json({
         success: false,
@@ -226,7 +238,8 @@ router.get("/", async (req, res) => {
         );
 
         if (
-          chain.ngo.toLowerCase() !== record.ngoWalletAddress.toLowerCase() ||
+          chain.ngo.toLowerCase() !==
+            record.ngoWalletAddress.toLowerCase() ||
           chain.name !== record.name
         ) {
           continue;
@@ -251,18 +264,17 @@ router.get("/", async (req, res) => {
           ),
         });
       } catch (error) {
-        // Do not show stale MongoDB sample records with no matching
-        // campaign on the current blockchain.
         console.warn(
           "Skipping campaign not present on chain:",
-          record.blockchainCampaignId
+          record.blockchainCampaignId,
+          error.message
         );
       }
     }
 
     return res.json({ success: true, campaigns });
   } catch (error) {
-    console.error("Campaign list error:", error.message);
+    console.error("Campaign list error:", error);
 
     return res.status(500).json({
       success: false,
