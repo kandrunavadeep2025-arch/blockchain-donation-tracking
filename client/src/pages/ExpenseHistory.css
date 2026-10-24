@@ -1,0 +1,1031 @@
+
+.expense-history-page {
+  min-height: 100vh;
+  padding: 42px 24px 64px;
+  background: #faf9f4;
+  color: #24372d;
+}
+
+.expense-history-container {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.expense-history-page button,
+.expense-history-page a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.expense-history-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  min-height: 320px;
+  padding: 48px 54px;
+  overflow: hidden;
+  border: 1px solid #e7e9e1;
+  border-radius: 28px;
+  background: linear-gradient(120deg, #f1f5e9 0%, #e6f0e5 100%);
+}
+
+.expense-history-hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+}
+
+.expense-history-eyebrow {
+  display: inline-block;
+  color: #62806c;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  line-height: 1.6;
+}
+
+.expense-history-hero h1 {
+  margin: 17px 0 16px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 800;
+  letter-spacing: -2.5px;
+  line-height: 1.1;
+}
+
+.expense-history-hero h1 span {
+  color: #397553;
+}
+
+.expense-history-hero-copy > p {
+  max-width: 535px;
+  margin: 0;
+  color: #68786d;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.expense-history-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.expense-history-primary-button,
+.expense-history-secondary-button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 19px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.expense-history-primary-button {
+  background: #205c43;
+  color: #fff;
+}
+
+.expense-history-primary-button:hover {
+  background: #174631;
+  transform: translateY(-1px);
+}
+
+.expense-history-primary-button:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.expense-history-secondary-button {
+  border-color: #d4e0d3;
+  background: rgba(255, 255, 255, 0.65);
+  color: #205c43;
+}
+
+.expense-history-secondary-button:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+.expense-history-button-spinner,
+.expense-history-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: expense-history-spin 0.8s linear infinite;
+}
+
+.expense-history-hero-art {
+  position: relative;
+  display: flex;
+  width: 310px;
+  min-width: 260px;
+  height: 260px;
+  align-items: center;
+  justify-content: center;
+}
+
+.expense-history-art-circle {
+  position: absolute;
+  border: 1px solid rgba(54, 108, 74, 0.14);
+  border-radius: 50%;
+}
+
+.expense-history-art-circle-one {
+  width: 250px;
+  height: 250px;
+}
+
+.expense-history-art-circle-two {
+  width: 190px;
+  height: 190px;
+}
+
+.expense-history-art-card {
+  position: relative;
+  z-index: 1;
+  width: 235px;
+  padding: 24px 22px 19px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.87);
+  box-shadow: 0 20px 50px rgba(38, 76, 50, 0.13);
+  transform: rotate(3deg);
+}
+
+.expense-history-art-icon {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #e3efe1;
+  color: #276746;
+  font-size: 24px;
+}
+
+.expense-history-art-label {
+  display: block;
+  margin-top: 21px;
+  color: #78907d;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.expense-history-art-card > strong {
+  display: block;
+  margin-top: 6px;
+  color: #244b34;
+  font-family: "Manrope", sans-serif;
+  font-size: 19px;
+  letter-spacing: -0.6px;
+}
+
+.expense-history-art-line {
+  height: 6px;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #edf1e9;
+}
+
+.expense-history-art-line span {
+  display: block;
+  width: 73%;
+  height: 100%;
+  border-radius: inherit;
+  background: #4b8962;
+}
+
+.expense-history-art-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+  color: #819087;
+  font-size: 10px;
+}
+
+.expense-history-live-dot {
+  display: inline-block;
+  width: 8px;
+  min-width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #48a16b;
+  box-shadow: 0 0 0 3px rgba(72, 161, 107, 0.12);
+}
+
+.expense-history-art-orbit {
+  position: absolute;
+  z-index: 2;
+  top: 29px;
+  right: 7px;
+  display: flex;
+  width: 43px;
+  height: 43px;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #e7f1e4;
+  border-radius: 50%;
+  background: #397553;
+  color: #fff;
+  font-size: 18px;
+  box-shadow: 0 8px 20px rgba(37, 90, 57, 0.18);
+}
+
+.expense-history-overview,
+.expense-history-campaign-section,
+.expense-history-records-section {
+  margin-top: 54px;
+}
+
+.expense-history-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.expense-history-section-heading h2 {
+  margin: 8px 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(24px, 3vw, 31px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.expense-history-section-description {
+  max-width: 640px;
+  margin: 9px 0 0;
+  color: #7a867d;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.expense-history-chain-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 13px;
+  border: 1px solid #e3e9de;
+  border-radius: 30px;
+  background: #fff;
+  color: #55745e;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.expense-history-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.expense-history-stat-card {
+  min-width: 0;
+  padding: 23px 22px;
+  border: 1px solid #e7e9e1;
+  border-radius: 19px;
+  background: #fff;
+  box-shadow: 0 7px 25px rgba(35, 65, 45, 0.035);
+}
+
+.expense-history-stat-highlight {
+  border-color: #d5e5d3;
+  background: #eef5e9;
+}
+
+.expense-history-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #78867c;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.expense-history-stat-icon {
+  display: flex;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: #edf3e9;
+  color: #36704d;
+  font-size: 18px;
+}
+
+.expense-history-stat-highlight .expense-history-stat-icon {
+  background: #dcebd8;
+}
+
+.expense-history-stat-card > strong {
+  display: block;
+  margin-top: 17px;
+  overflow-wrap: anywhere;
+  color: #254d35;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(23px, 2.5vw, 31px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.expense-history-stat-unit {
+  display: block;
+  margin-top: 8px;
+  color: #8a958c;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.expense-history-campaign-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.expense-history-campaign-card {
+  padding: 25px;
+  border: 1px solid #e7e9e1;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 7px 25px rgba(35, 65, 45, 0.035);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.expense-history-campaign-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 13px 30px rgba(35, 65, 45, 0.07);
+}
+
+.expense-history-campaign-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.expense-history-campaign-id,
+.expense-history-record-number {
+  color: #879389;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.expense-history-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #f0f1ed;
+  color: #6c776e;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.expense-history-status-active {
+  background: #e4f3e5;
+  color: #2d7647;
+}
+
+.expense-history-status-completed {
+  background: #e7eefb;
+  color: #42639b;
+}
+
+.expense-history-status-pending {
+  background: #fff2d9;
+  color: #996e21;
+}
+
+.expense-history-status-removed {
+  background: #f9e8e5;
+  color: #a24e43;
+}
+
+.expense-history-campaign-card h3 {
+  margin: 17px 0 20px;
+  font-family: "Manrope", sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  overflow-wrap: anywhere;
+}
+
+.expense-history-raised-label {
+  color: #839086;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.expense-history-raised-amount {
+  margin-top: 5px;
+  color: #285e3e;
+  font-family: "Manrope", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+.expense-history-raised-amount span {
+  color: #849387;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.expense-history-goal {
+  margin-top: 6px;
+  color: #8b958d;
+  font-size: 11px;
+}
+
+.expense-history-fund-details {
+  display: grid;
+  gap: 0;
+  margin-top: 23px;
+  padding-top: 7px;
+  border-top: 1px solid #edf0e9;
+}
+
+.expense-history-fund-details > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f1ed;
+}
+
+.expense-history-fund-details > div:last-child {
+  border-bottom: 0;
+}
+
+.expense-history-fund-details span {
+  color: #7d897f;
+  font-size: 12px;
+}
+
+.expense-history-fund-details strong {
+  color: #344f3c;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.expense-history-fund-details .expense-history-available-row strong {
+  color: #2d794b;
+}
+
+.expense-history-record-count {
+  padding: 9px 13px;
+  border: 1px solid #e5e9e0;
+  border-radius: 25px;
+  background: #fff;
+  color: #607466;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.expense-history-status-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.expense-history-status-summary > div {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border: 1px solid #e7e9e1;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.expense-history-status-summary-icon {
+  display: flex;
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.expense-history-status-summary-icon.verified {
+  background: #e3f3e5;
+  color: #2d794b;
+}
+
+.expense-history-status-summary-icon.pending {
+  background: #fff0d4;
+  color: #a27526;
+}
+
+.expense-history-status-summary-icon.paid {
+  background: #e5edfa;
+  color: #476da4;
+}
+
+.expense-history-status-summary > div > span:nth-child(2) {
+  color: #758178;
+  font-size: 11px;
+}
+
+.expense-history-status-summary strong {
+  color: #2d4937;
+  font-size: 13px;
+}
+
+.expense-history-record-list {
+  display: grid;
+  gap: 14px;
+}
+
+.expense-history-record-card {
+  display: flex;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid #e7e9e1;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 7px 25px rgba(35, 65, 45, 0.035);
+}
+
+.expense-history-record-icon {
+  display: flex;
+  width: 47px;
+  min-width: 47px;
+  height: 47px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: #e9f2e5;
+  color: #33714b;
+  font-size: 23px;
+}
+
+.expense-history-record-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-history-record-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.expense-history-record-title-row h3 {
+  margin: 8px 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  overflow-wrap: anywhere;
+}
+
+.expense-history-record-amount {
+  color: #285f3e;
+  font-family: "Manrope", sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.expense-history-record-amount span {
+  color: #839187;
+  font-size: 11px;
+}
+
+.expense-history-record-campaign {
+  margin: 9px 0 19px;
+  color: #839087;
+  font-size: 12px;
+}
+
+.expense-history-record-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 20px;
+  padding: 15px 0;
+  border-top: 1px solid #edf0e9;
+  border-bottom: 1px solid #edf0e9;
+}
+
+.expense-history-record-meta > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.expense-history-record-meta > div > span {
+  color: #89938b;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.expense-history-record-meta code {
+  color: #496653;
+  font-size: 11px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.expense-history-record-meta strong {
+  color: #5d7062;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.expense-history-record-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 15px;
+}
+
+.expense-history-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.expense-history-badge.is-verified,
+.expense-history-badge.is-paid {
+  background: #e6f4e7;
+  color: #2d7847;
+}
+
+.expense-history-badge.is-pending,
+.expense-history-badge.is-unpaid {
+  background: #fff3dd;
+  color: #9b722c;
+}
+
+.expense-history-empty {
+  display: flex;
+  min-height: 245px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  border: 1px dashed #dbe2d6;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.68);
+  text-align: center;
+}
+
+.expense-history-empty-icon {
+  display: flex;
+  width: 53px;
+  height: 53px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 17px;
+  background: #eaf2e5;
+  color: #38754e;
+  font-size: 27px;
+}
+
+.expense-history-empty h3 {
+  margin: 17px 0 6px;
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+}
+
+.expense-history-empty p {
+  max-width: 420px;
+  margin: 0;
+  color: #7e8a80;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.expense-history-empty a {
+  display: inline-flex;
+  margin-top: 17px;
+  padding: 11px 16px;
+  border-radius: 10px;
+  background: #205c43;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.expense-history-error {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+  padding: 18px 20px;
+  border: 1px solid #f0d7d0;
+  border-radius: 16px;
+  background: #fff5f2;
+}
+
+.expense-history-error-icon {
+  display: flex;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f8dfd8;
+  color: #a64f3f;
+  font-weight: 800;
+}
+
+.expense-history-error strong {
+  color: #904638;
+  font-size: 13px;
+}
+
+.expense-history-error p {
+  margin: 5px 0 10px;
+  color: #946b63;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.expense-history-error button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #8d4739;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.expense-history-footer-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 30px;
+  padding: 19px 21px;
+  border: 1px solid #e2e8dc;
+  border-radius: 15px;
+  background: #f0f4e9;
+}
+
+.expense-history-footer-icon {
+  display: flex;
+  width: 29px;
+  min-width: 29px;
+  height: 29px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #dcebd6;
+  color: #37734b;
+  font-size: 18px;
+}
+
+.expense-history-footer-note p {
+  margin: 0;
+  color: #738075;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.expense-history-footer-note strong {
+  color: #3b5c43;
+}
+
+.expense-history-loading {
+  display: flex;
+  min-height: 65vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.expense-history-spinner {
+  width: 36px;
+  height: 36px;
+  border-color: #d8e5d5;
+  border-top-color: #397553;
+  border-width: 3px;
+}
+
+.expense-history-loading h2 {
+  margin: 20px 0 5px;
+  font-family: "Manrope", sans-serif;
+  font-size: 22px;
+}
+
+.expense-history-loading p {
+  color: #849087;
+  font-size: 13px;
+}
+
+@keyframes expense-history-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 980px) {
+  .expense-history-hero {
+    padding: 38px;
+  }
+
+  .expense-history-hero-art {
+    width: 260px;
+    min-width: 230px;
+  }
+
+  .expense-history-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .expense-history-page {
+    padding: 22px 15px 42px;
+  }
+
+  .expense-history-hero {
+    min-height: auto;
+    padding: 30px 23px;
+    border-radius: 22px;
+  }
+
+  .expense-history-hero-art {
+    display: none;
+  }
+
+  .expense-history-hero h1 {
+    font-size: 40px;
+    letter-spacing: -1.8px;
+  }
+
+  .expense-history-hero-copy > p {
+    font-size: 13px;
+  }
+
+  .expense-history-hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .expense-history-primary-button,
+  .expense-history-secondary-button {
+    width: 100%;
+  }
+
+  .expense-history-overview,
+  .expense-history-campaign-section,
+  .expense-history-records-section {
+    margin-top: 39px;
+  }
+
+  .expense-history-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .expense-history-chain-label {
+    white-space: normal;
+  }
+
+  .expense-history-stat-grid {
+    gap: 11px;
+  }
+
+  .expense-history-stat-card {
+    padding: 17px 15px;
+    border-radius: 15px;
+  }
+
+  .expense-history-stat-card > strong {
+    font-size: 24px;
+  }
+
+  .expense-history-stat-top {
+    align-items: flex-start;
+    font-size: 11px;
+  }
+
+  .expense-history-stat-icon {
+    width: 29px;
+    min-width: 29px;
+    height: 29px;
+  }
+
+  .expense-history-campaign-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .expense-history-campaign-card {
+    padding: 21px;
+  }
+
+  .expense-history-record-card {
+    gap: 12px;
+    padding: 17px 14px;
+    border-radius: 16px;
+  }
+
+  .expense-history-record-icon {
+    width: 37px;
+    min-width: 37px;
+    height: 37px;
+    border-radius: 12px;
+    font-size: 18px;
+  }
+
+  .expense-history-record-title-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .expense-history-record-title-row h3 {
+    font-size: 15px;
+  }
+
+  .expense-history-record-amount {
+    font-size: 19px;
+    text-align: left;
+  }
+
+  .expense-history-record-meta {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .expense-history-status-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .expense-history-status-summary > div {
+    justify-content: flex-start;
+  }
+
+  .expense-history-footer-note {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 380px) {
+  .expense-history-stat-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .expense-history-hero h1 {
+    font-size: 35px;
+  }
+
+  .expense-history-record-badges {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

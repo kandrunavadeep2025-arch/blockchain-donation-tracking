@@ -1,0 +1,630 @@
+
+.donation-history-page {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 42px 28px 64px;
+  color: #24372d;
+}
+
+.donation-history-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 330px;
+  padding: 46px 58px;
+  overflow: hidden;
+  background: #eaf1e8;
+  border: 1px solid #e0e9df;
+  border-radius: 28px;
+}
+
+.donation-history-hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+}
+
+.dh-eyebrow {
+  display: inline-block;
+  color: #52715c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.donation-history-hero h1 {
+  margin: 17px 0 14px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(38px, 5vw, 59px);
+  font-weight: 800;
+  letter-spacing: -2.6px;
+  line-height: 1.08;
+}
+
+.donation-history-hero h1 span {
+  color: #39734f;
+}
+
+.donation-history-hero-copy > p {
+  max-width: 455px;
+  margin: 0 0 23px;
+  color: #647468;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.dh-browse-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #205c43;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.dh-browse-link:hover,
+.dh-state-link:hover {
+  color: #397c57;
+}
+
+.dh-hero-art {
+  position: relative;
+  display: grid;
+  flex: 0 0 250px;
+  width: 250px;
+  height: 250px;
+  place-items: center;
+  margin-right: 12px;
+  border-radius: 50%;
+  background: #dce9d9;
+}
+
+.dh-art-orbit {
+  position: absolute;
+  border: 1px solid rgba(32, 92, 67, 0.23);
+  border-radius: 50%;
+}
+
+.orbit-outer {
+  width: 220px;
+  height: 220px;
+}
+
+.orbit-inner {
+  width: 160px;
+  height: 160px;
+}
+
+.dh-art-center {
+  display: grid;
+  width: 100px;
+  height: 100px;
+  place-items: center;
+  color: #fff;
+  font-size: 53px;
+  background: #286548;
+  border-radius: 32px;
+  box-shadow: 0 15px 32px rgba(32, 92, 67, 0.22);
+  transform: rotate(-8deg);
+}
+
+.dh-art-star {
+  position: absolute;
+  color: #39734f;
+  font-size: 29px;
+}
+
+.star-top {
+  top: 19px;
+  right: 29px;
+}
+
+.star-bottom {
+  bottom: 25px;
+  left: 24px;
+  color: #91ad82;
+}
+
+.dh-wallet-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 25px;
+  padding: 22px 25px;
+  background: #fff;
+  border: 1px solid #e7e9e1;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(35, 65, 45, 0.04);
+}
+
+.dh-wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+}
+
+.dh-wallet-icon {
+  display: grid;
+  flex-shrink: 0;
+  width: 49px;
+  height: 49px;
+  place-items: center;
+  color: #205c43;
+  font-size: 28px;
+  background: #e8f1e9;
+  border-radius: 15px;
+}
+
+.dh-wallet-info > div {
+  min-width: 0;
+}
+
+.dh-wallet-info strong {
+  display: block;
+  margin-top: 5px;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.dh-wallet-info p {
+  margin: 4px 0 0;
+  color: #758178;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.dh-connect-button,
+.dh-state-card button {
+  flex-shrink: 0;
+  padding: 12px 18px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  background: #205c43;
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+}
+
+.dh-connect-button:hover,
+.dh-state-card button:hover {
+  background: #174631;
+}
+
+.dh-connect-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.dh-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.dh-summary-card {
+  padding: 25px 27px;
+  background: #fff;
+  border: 1px solid #e7e9e1;
+  border-radius: 19px;
+}
+
+.dh-summary-highlight {
+  background: #f0f5ed;
+  border-color: #e2ebde;
+}
+
+.dh-summary-label {
+  display: block;
+  color: #758178;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.dh-summary-card > strong {
+  display: block;
+  margin-top: 12px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+.dh-summary-card > strong small {
+  color: #39734f;
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.dh-summary-caption {
+  display: block;
+  margin-top: 7px;
+  color: #758178;
+  font-size: 12px;
+}
+
+.dh-records-section {
+  margin-top: 43px;
+}
+
+.dh-records-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 19px;
+}
+
+.dh-records-heading h2 {
+  margin: 8px 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.dh-record-count {
+  padding: 7px 12px;
+  color: #39734f;
+  font-size: 12px;
+  font-weight: 700;
+  background: #e8f1e9;
+  border-radius: 20px;
+}
+
+.dh-donation-list {
+  display: grid;
+  gap: 14px;
+}
+
+.dh-donation-card {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 23px;
+  background: #fff;
+  border: 1px solid #e7e9e1;
+  border-radius: 19px;
+  box-shadow: 0 5px 18px rgba(35, 65, 45, 0.025);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dh-donation-card:hover {
+  border-color: #c9d9ca;
+  box-shadow: 0 10px 25px rgba(35, 65, 45, 0.06);
+}
+
+.dh-donation-icon {
+  display: grid;
+  flex-shrink: 0;
+  width: 51px;
+  height: 51px;
+  place-items: center;
+  color: #286548;
+  font-size: 25px;
+  background: #eaf2e8;
+  border-radius: 16px;
+}
+
+.dh-donation-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.dh-donation-main h3 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.dh-donation-main p {
+  margin: 7px 0 5px;
+  color: #758178;
+  font-size: 12px;
+}
+
+.dh-record-separator {
+  margin: 0 7px;
+}
+
+.dh-donation-date {
+  color: #758178;
+  font-size: 11px;
+}
+
+.dh-donation-amount {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.dh-donation-amount > strong {
+  color: #205c43;
+  font-family: "Manrope", sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.dh-donation-amount > span:not(.dh-recorded-badge) {
+  color: #758178;
+  font-size: 11px;
+}
+
+.dh-recorded-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  padding: 6px 9px;
+  color: #39734f;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  background: #edf5eb;
+  border-radius: 20px;
+}
+
+.dh-recorded-badge > span {
+  width: 6px;
+  height: 6px;
+  background: #4b9464;
+  border-radius: 50%;
+}
+
+.dh-state-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e7e9e1;
+  border-radius: 20px;
+}
+
+.dh-state-symbol {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  color: #286548;
+  font-size: 28px;
+  background: #e8f1e9;
+  border-radius: 18px;
+}
+
+.dh-state-card h3 {
+  margin: 18px 0 5px;
+  font-family: "Manrope", sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.dh-state-card p {
+  max-width: 500px;
+  margin: 7px 0 17px;
+  color: #758178;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.dh-state-card button {
+  margin-top: 3px;
+}
+
+.dh-state-error .dh-state-symbol {
+  color: #a33d35;
+  background: #f9e9e6;
+}
+
+.dh-state-link {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #205c43;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.dh-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e2ebde;
+  border-top-color: #286548;
+  border-radius: 50%;
+  animation: dh-spin 0.8s linear infinite;
+}
+
+@keyframes dh-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dh-bottom-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 23px;
+  padding: 17px 20px;
+  background: #f0f5ed;
+  border: 1px solid #e2ebde;
+  border-radius: 15px;
+}
+
+.dh-bottom-note > span {
+  display: grid;
+  flex-shrink: 0;
+  width: 23px;
+  height: 23px;
+  place-items: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  background: #39734f;
+  border-radius: 50%;
+}
+
+.dh-bottom-note p {
+  margin: 1px 0 0;
+  color: #647468;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+@media (max-width: 760px) {
+  .donation-history-page {
+    padding: 25px 17px 45px;
+  }
+
+  .donation-history-hero {
+    min-height: auto;
+    padding: 34px 27px;
+    border-radius: 23px;
+  }
+
+  .dh-hero-art {
+    flex-basis: 155px;
+    width: 155px;
+    height: 155px;
+    margin-right: -35px;
+  }
+
+  .orbit-outer {
+    width: 140px;
+    height: 140px;
+  }
+
+  .orbit-inner {
+    width: 105px;
+    height: 105px;
+  }
+
+  .dh-art-center {
+    width: 66px;
+    height: 66px;
+    font-size: 38px;
+    border-radius: 22px;
+  }
+
+  .star-top {
+    top: 9px;
+    right: 15px;
+  }
+
+  .star-bottom {
+    bottom: 12px;
+    left: 13px;
+  }
+
+  .dh-wallet-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dh-connect-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 540px) {
+  .donation-history-hero {
+    padding: 31px 23px;
+  }
+
+  .donation-history-hero h1 {
+    font-size: 39px;
+    letter-spacing: -1.8px;
+  }
+
+  .donation-history-hero-copy > p {
+    font-size: 13px;
+  }
+
+  .dh-hero-art {
+    position: absolute;
+    right: -48px;
+    bottom: -48px;
+    width: 150px;
+    height: 150px;
+    opacity: 0.35;
+  }
+
+  .dh-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .dh-summary-card {
+    padding: 22px;
+  }
+
+  .dh-records-heading h2 {
+    font-size: 24px;
+  }
+
+  .dh-donation-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 13px;
+    padding: 18px;
+  }
+
+  .dh-donation-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+  }
+
+  .dh-donation-main {
+    width: calc(100% - 60px);
+    flex: none;
+  }
+
+  .dh-donation-amount {
+    width: 100%;
+    align-items: flex-start;
+    padding-left: 56px;
+  }
+
+  .dh-recorded-badge {
+    white-space: normal;
+  }
+
+  .dh-wallet-info {
+    align-items: flex-start;
+  }
+
+  .dh-wallet-info strong {
+    font-size: 14px;
+  }
+
+  .dh-bottom-note {
+    padding: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dh-spinner {
+    animation: none;
+  }
+
+  .dh-donation-card {
+    transition: none;
+  }
+}

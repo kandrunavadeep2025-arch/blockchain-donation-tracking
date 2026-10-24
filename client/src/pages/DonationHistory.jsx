@@ -1,7 +1,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { ethers } from "ethers";
+import { Link } from "react-router-dom";
 import { contract } from "../contract";
+import "./DonationHistory.css";
 
 function formatEth(value) {
   return Number(ethers.formatEther(value)).toLocaleString("en-US", {
@@ -36,7 +38,6 @@ function DonationHistory() {
       for (let index = 0; index < count; index++) {
         const donation = await contract.getDonation(index);
 
-        // Show only donations made by the connected wallet.
         if (donation.donor.toLowerCase() !== walletAddress.toLowerCase()) {
           continue;
         }
@@ -49,7 +50,7 @@ function DonationHistory() {
           );
           campaignName = campaign.name;
         } catch {
-          // Keep the campaign ID if its details cannot be loaded.
+          // Keep the campaign ID if details cannot be loaded.
         }
 
         results.push({
@@ -64,7 +65,6 @@ function DonationHistory() {
       }
 
       results.sort((a, b) => b.index - a.index);
-
       setDonations(results);
 
       if (results.length === 0) {
@@ -105,9 +105,7 @@ function DonationHistory() {
     } catch (err) {
       console.error(err);
       setError(
-        err?.shortMessage ||
-          err?.message ||
-          "Could not connect to MetaMask."
+        err?.shortMessage || err?.message || "Could not connect to MetaMask."
       );
     }
   }
@@ -159,75 +157,183 @@ function DonationHistory() {
     };
   }, [loadHistory]);
 
+  const shortAccount = account
+    ? `${account.slice(0, 6)}...${account.slice(-4)}`
+    : "Not connected";
+
+  const totalEth = donations.reduce(
+    (sum, donation) => sum + Number(donation.amount),
+    0
+  );
+
   return (
-    <div style={{ padding: "30px", maxWidth: "1000px", margin: "auto" }}>
-      <h1>My Donation History</h1>
+    <main className="donation-history-page">
+      <section className="donation-history-hero">
+        <div className="donation-history-hero-copy">
+          <span className="dh-eyebrow">YOUR GIVING JOURNEY</span>
+          <h1>
+            Every gift
+            <br />
+            <span>leaves a trace.</span>
+          </h1>
+          <p>
+            Your donations, recorded on the blockchain. Review your
+            contributions and see the causes you've supported.
+          </p>
+          <Link to="/campaigns" className="dh-browse-link">
+            Explore campaigns <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
 
-      <p>
-        Donations are read from the deployed DonationTracker contract.
-        Amounts are displayed in ETH.
-      </p>
+        <div className="dh-hero-art" aria-hidden="true">
+          <div className="dh-art-orbit orbit-outer" />
+          <div className="dh-art-orbit orbit-inner" />
+          <div className="dh-art-center">♡</div>
+          <span className="dh-art-star star-top">✳</span>
+          <span className="dh-art-star star-bottom">✦</span>
+        </div>
+      </section>
 
-      <p>
-        <strong>Connected wallet:</strong>{" "}
-        {account || "Not connected"}
-      </p>
+      <section className="dh-wallet-panel">
+        <div className="dh-wallet-info">
+          <span className="dh-wallet-icon" aria-hidden="true">◇</span>
+          <div>
+            <span className="dh-eyebrow">BLOCKCHAIN WALLET</span>
+            <strong>{shortAccount}</strong>
+            <p>
+              {account
+                ? "Showing donations made by this wallet."
+                : "Connect your wallet to view your personal records."}
+            </p>
+          </div>
+        </div>
 
-      <button
-        type="button"
-        onClick={connectWallet}
-        disabled={loading}
-      >
-        Connect / Refresh Wallet
-      </button>
+        <button
+          type="button"
+          className="dh-connect-button"
+          onClick={connectWallet}
+          disabled={loading}
+        >
+          {loading
+            ? "Loading records..."
+            : account
+              ? "↻ Refresh wallet"
+              : "Connect MetaMask"}
+        </button>
+      </section>
 
-      {loading && <p>Loading blockchain donation records...</p>}
+      {account && (
+        <section className="dh-summary-grid">
+          <article className="dh-summary-card">
+            <span className="dh-summary-label">YOUR DONATIONS</span>
+            <strong>{donations.length}</strong>
+            <span className="dh-summary-caption">Blockchain records</span>
+          </article>
 
-      {error && (
-        <p role="alert" style={{ color: "red" }}>
-          {error}
+          <article className="dh-summary-card dh-summary-highlight">
+            <span className="dh-summary-label">TOTAL CONTRIBUTED</span>
+            <strong>{totalEth.toLocaleString("en-US", {
+              maximumFractionDigits: 8,
+            })} <small>ETH</small></strong>
+            <span className="dh-summary-caption">Combined donation amount</span>
+          </article>
+        </section>
+      )}
+
+      <section className="dh-records-section">
+        <div className="dh-records-heading">
+          <div>
+            <span className="dh-eyebrow">YOUR TRANSACTION TRAIL</span>
+            <h2>Donation history</h2>
+          </div>
+          {!loading && donations.length > 0 && (
+            <span className="dh-record-count">
+              {donations.length} {donations.length === 1 ? "record" : "records"}
+            </span>
+          )}
+        </div>
+
+        {loading && (
+          <div className="dh-state-card">
+            <span className="dh-spinner" />
+            <p>Reading donation records from the blockchain...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="dh-state-card dh-state-error" role="alert">
+            <span className="dh-state-symbol">!</span>
+            <h3>We couldn't load your records</h3>
+            <p>{error}</p>
+            <button type="button" onClick={connectWallet}>
+              Try again
+            </button>
+          </div>
+        )}
+
+        {!loading && !error && message && (
+          <div className="dh-state-card">
+            <span className="dh-state-symbol">◇</span>
+            <h3>
+              {!window.ethereum
+                ? "MetaMask is needed"
+                : account
+                  ? "No donations yet"
+                  : "Connect your wallet"}
+            </h3>
+            <p>{message}</p>
+
+            {!account && window.ethereum && (
+              <button type="button" onClick={connectWallet}>
+                Connect MetaMask
+              </button>
+            )}
+
+            {account && (
+              <Link to="/campaigns" className="dh-state-link">
+                Browse campaigns <span aria-hidden="true">→</span>
+              </Link>
+            )}
+          </div>
+        )}
+
+        {!loading && !error && donations.length > 0 && (
+          <div className="dh-donation-list">
+            {donations.map((donation) => (
+              <article className="dh-donation-card" key={donation.index}>
+                <div className="dh-donation-icon" aria-hidden="true">♡</div>
+
+                <div className="dh-donation-main">
+                  <h3>{donation.campaignName}</h3>
+                  <p>
+                    Campaign #{donation.campaignId}
+                    <span className="dh-record-separator">·</span>
+                    Donation #{donation.index + 1}
+                  </p>
+                  <span className="dh-donation-date">{donation.timestamp}</span>
+                </div>
+
+                <div className="dh-donation-amount">
+                  <strong>+{donation.amount}</strong>
+                  <span>ETH donated</span>
+                  <span className="dh-recorded-badge">
+                    <span /> Blockchain recorded
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <div className="dh-bottom-note">
+        <span aria-hidden="true">✓</span>
+        <p>
+          These records are retrieved from the deployed DonationTracker
+          smart contract. Amounts are displayed in ETH.
         </p>
-      )}
-
-      {message && <p role="status">{message}</p>}
-
-      {!loading && donations.length > 0 && (
-        <>
-          <h2>Total donations: {donations.length}</h2>
-
-          {donations.map((donation) => (
-            <article
-              key={donation.index}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: "10px",
-                padding: "20px",
-                marginTop: "16px",
-              }}
-            >
-              <h3>{donation.campaignName}</h3>
-
-              <p>
-                <strong>Campaign ID:</strong> {donation.campaignId}
-              </p>
-
-              <p>
-                <strong>Donation Amount:</strong> {donation.amount} ETH
-              </p>
-
-              <p>
-                <strong>Transaction record:</strong>{" "}
-                Blockchain donation #{donation.index + 1}
-              </p>
-
-              <p>
-                <strong>Date:</strong> {donation.timestamp}
-              </p>
-            </article>
-          ))}
-        </>
-      )}
-    </div>
+      </div>
+    </main>
   );
 }
 
